@@ -1,0 +1,15 @@
+{
+  "name": "Insider Sniper V4 — Live Scanner",
+  "short_name": "Sniper V4",
+  "description": "Insider-level market scanner, World Wire news desk, live alerts and auto-trading for Gold, Forex, Stocks and Crypto.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f1f4fa",
+  "theme_color": "#f1f4fa",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

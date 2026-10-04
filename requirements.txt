@@ -1,0 +1,1 @@
+# Insider Sniper V4 — no dependencies, Python standard library only
