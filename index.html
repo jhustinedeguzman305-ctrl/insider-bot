@@ -51,7 +51,7 @@
   ::selection { background: #c7d2fe; color: #1e1b4b; }
   :focus-visible { outline: 2px solid #4338ca; outline-offset: 2px; }
   button, input, select { font-family: inherit; }
-  canvas { display: block; }
+  canvas { width: 100%; height: 100%; display: block; }
   ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-thumb { background: #c3cde1; border-radius: 8px; border: 2px solid var(--bg); }
   ::-webkit-scrollbar-thumb:hover { background: #a7b4cf; }
@@ -415,8 +415,8 @@
 
   /* ─── CHART ─── */
   .chart-toolbar { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; padding: 9px 12px; background: #f7f9fd; border-bottom: 1px solid var(--border); }
-  .chart-wrap { position: relative; background: #0b1220; border-radius: 13px; overflow: hidden; }
-  .chart-wrap:active { transform: none; }
+  .chart-wrap { position: relative; height: 470px; width: 100%; background: #070a11; border-radius: 13px; overflow: hidden; cursor: grab; user-select: none; }
+  .chart-wrap:active { cursor: grabbing; transform: none; }
   .sym-btn {
     border: 1px solid var(--border-2); background: #fff; color: #475569;
     border-radius: 9px; padding: 6px 11px; font-size: 11.5px; font-weight: 800; cursor: pointer;
@@ -519,6 +519,48 @@
   .p-pill.rel-box { border-radius: 11px; }
   .vnc-trans li:last-child { border-bottom: none; }
 
+  
+  /* ─── RESTORED SELECTORS (chart grid, KPI row, feeds, toast contract) ─── */
+  .chart-hero-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; margin-bottom: 15px;
+    box-shadow: var(--shadow-soft); scroll-margin-top: 96px;
+  }
+  .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 15px; }
+  .lower-grid { display: grid; grid-template-columns: 370px 1fr; gap: 14px; }
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+  .kpi-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 10px;
+    background: #f1f5f9; border: 1px solid var(--border); font-size: 16px; flex: 0 0 34px;
+  }
+  .kpi-mkt .kpi-icon { background: rgba(2, 132, 199, 0.10); border-color: rgba(2, 132, 199, 0.30); }
+  .kpi-sig .kpi-icon { background: rgba(5, 150, 105, 0.10); border-color: rgba(5, 150, 105, 0.30); }
+  .kpi-win .kpi-icon { background: rgba(180, 83, 9, 0.10); border-color: rgba(180, 83, 9, 0.30); }
+  .kpi-alert .kpi-icon { background: rgba(124, 58, 237, 0.10); border-color: rgba(124, 58, 237, 0.30); }
+  .controls-bar {
+    display: flex; flex-direction: column; gap: 10px;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 15px; margin-bottom: 14px;
+    box-shadow: var(--shadow-soft); scroll-margin-top: 96px;
+  }
+  .bot-panel {
+    position: relative; overflow: hidden;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px; margin-bottom: 16px;
+    box-shadow: var(--shadow-soft); scroll-margin-top: 96px;
+  }
+  #scanBody tr { cursor: pointer; transition: background 0.12s; }
+  .hist-wrap { max-height: 310px; overflow: auto; }
+  .qf-txt { display: flex; flex-direction: column; min-width: 0; }
+  .qf-arrow { align-self: center; color: #475569; font-weight: 900; font-size: 15px; flex: none; }
+  .vcc-trans { padding: 11px 12px; display: flex; flex-direction: column; gap: 7px; background: #f8f7ff; flex: 1; border-radius: 11px; }
+  .vis-notif-card.SELL .vnc-top { background: rgba(220, 38, 38, 0.10); color: var(--bear); }
+  .nd-item .m { font-size: 11.5px; color: #3d4a63; line-height: 1.45; }
+  #toastBanner .vis-notif-card { padding: 9px 10px; }
+  #toastBanner .vnc-trans { font-size: 10px !important; line-height: 1.45 !important; max-height: 92px; overflow-y: auto; padding: 6px 8px !important; }
+  #toastBanner .vnc-trans .step { font-size: 10px !important; }
+
   /* ═══════════ PHONE (≤760px) — no sticky chrome, tiny toasts, big taps ═══════════ */
   @media (max-width: 760px) {
     header, .app-header { position: static; }
@@ -538,6 +580,11 @@
     .chip-btn { padding: 8px 13px; }
     .bot-mini { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .hist-table th, .hist-table td { padding: 8px 8px; }
+    .chart-wrap { height: 380px; }
+    .cat-grid, .lower-grid, .kpi-row { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    #wireList, #calList, .hist-wrap { max-height: none; }
+    #scanner, #chartSection, #autoBot, #phoneAlerts, #marketScanner, #worldWire, #calendarSection, #walletSection, #priceAlertsSec, #portfolioSection, #calcSection, #watchSection { scroll-margin-top: 12px; }
     .section-head { padding-top: 20px; }
     #toastBanner .vnc-box strong { font-size: 11.5px; }
   }
@@ -627,7 +674,7 @@
         <span class="tape-item">PHONE ALERTS <b>3 SEPARATE ntfy INBOXES</b></span>
         <span class="tape-item">MARKETS <b>GOLD · FOREX · STOCKS · CRYPTO</b></span>
         <span class="tape-item">AUTO-EXECUTION <b>MT4 / MT5 · Binance · Bybit</b></span>
-        <span class="tape-item">AUTO-TRADING BOT <b class="soon">COMING SOON 🚧</b></span>
+        <span class="tape-item">AUTO-TRADING BOT <b class="up">ACTIVE ✅ REAL ORDERS</b></span>
         <span class="tape-item">EDUCATIONAL TOOL — NOT FINANCIAL ADVICE</span>
       </div>
       <div class="tape-half" aria-hidden="true">
@@ -638,7 +685,7 @@
         <span class="tape-item">PHONE ALERTS <b>3 SEPARATE ntfy INBOXES</b></span>
         <span class="tape-item">MARKETS <b>GOLD · FOREX · STOCKS · CRYPTO</b></span>
         <span class="tape-item">AUTO-EXECUTION <b>MT4 / MT5 · Binance · Bybit</b></span>
-        <span class="tape-item">AUTO-TRADING BOT <b class="soon">COMING SOON 🚧</b></span>
+        <span class="tape-item">AUTO-TRADING BOT <b class="up">ACTIVE ✅ REAL ORDERS</b></span>
         <span class="tape-item">EDUCATIONAL TOOL — NOT FINANCIAL ADVICE</span>
       </div>
     </div>
@@ -703,7 +750,7 @@
 <!-- ═══════════ ✅ BEGINNER ONBOARDING (dismissible) ═══════════ -->
 <div id="onboardCard" style="display:none; background:linear-gradient(135deg, rgba(0,176,255,.10), rgba(192,132,252,.08)); border:1px solid rgba(0,176,255,.4); border-radius:14px; padding:14px 16px; margin:14px 0 4px;">
   <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
-    <div style="font-size:13.5px; font-weight:900; color:#fff;">✅ First time? Your 5-step checklist</div>
+    <div style="font-size:13.5px; font-weight:900; color:#0e1526;">✅ First time? Your 5-step checklist</div>
     <button onclick="dismissOnboard()" style="background:none; border:1px solid #2c3e5a; color:#64748b; border-radius:8px; padding:4px 10px; font-size:11px; font-weight:800; cursor:pointer;">Hide</button>
   </div>
   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:8px; margin-top:10px;">
@@ -878,7 +925,7 @@
 <div class="chart-hero-card" id="chartSection">
   <div class="chart-toolbar">
     <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-      <strong id="chartHeaderTitle" style="color:#fff; font-size:14px;">📈 Interactive Chart — BTCUSDT [5m]</strong>
+      <strong id="chartHeaderTitle" style="color:#0e1526; font-size:14px;">📈 Interactive Chart — BTCUSDT [5m]</strong>
         <span id="priceSrcBadge" style="font-size:10px; font-weight:800; color:#64748b; background:#ffffff; border:1px solid var(--border); border-radius:999px; padding:3px 9px; margin-left:6px;">📡 connecting live price…</span>
         <a href="#worldWire" style="font-size:10px; font-weight:900; color:#b45309; background:rgba(255,214,0,.08); border:1px solid rgba(255,214,0,.4); border-radius:999px; padding:3px 9px; margin-left:6px; text-decoration:none;">🌍 World Wire news →</a>
         <button onclick="shareTradeCard()" style="font-size:10px; font-weight:900; color:#059669; background:rgba(0,230,118,.08); border:1px solid rgba(0,230,118,.4); border-radius:999px; padding:3px 9px; margin-left:6px; cursor:pointer;">📸 Share Setup</button>
@@ -912,7 +959,7 @@
   </div>
 </div>
 
-<!-- ═══════════════ 🤖 AUTOMATIC TRADING (BOT) — PLACEHOLDER PREVIEW ═══════════════ -->
+<!-- ═══════════════ 🤖 AUTOMATIC TRADING (BOT) — LIVE CONSOLE ═══════════════ -->
 <!-- ═══════════ 🔔 PRICE ALERTS ═══════════ -->
 <div class="zone-bar"><span class="zone-k">📡</span> Signals · Grid · News · Calendar</div>
 <div class="section-head" id="priceAlertsSec">
@@ -1039,7 +1086,7 @@
     <div class="section-title"><span class="ico">🤖</span> Automatic Trading (Bot) <span class="ok-badge">✅ REAL-MONEY AUTOTRADER</span></div>
     <div class="section-sub">The bot now trades <b>by itself</b> — it thinks like an insider using the exact same Insider Sniper V4 engine as the notifications (order-flow delta, EMA pullbacks, liquidity sweeps, whale defense) and picks its own BUY/SELL moments on <b>1m</b>, <b>5m</b> or <b>15m</b>. It also listens to the live notification feed as confirmation. <b>Real-money mode:</b> orders go to the exchange you connect — your keys, your funds, your account. <b>Start with a tiny size</b> and grow only after you've seen real fills land.</div>
   </div>
-  <span class="chip">🤖 AUTOPILOT · VIRTUAL $</span>
+  <span class="chip">🤖 AUTOPILOT · REAL MONEY</span>
 </div>
 
 <!-- ═══════════ 🔌 WALLET & EXCHANGE CONNECTIONS (REAL API KEYS) ═══════════ -->
@@ -1151,7 +1198,7 @@
       </div>
       <div class="master-bar">
         <div>
-          <div style="font-size:12.5px; font-weight:900; color:#fff;">🤖 Automatic Trading Bot</div>
+          <div style="font-size:12.5px; font-weight:900; color:#0e1526;">🤖 Automatic Trading Bot</div>
           <div style="font-size:10.5px; color:var(--muted); font-weight:800; letter-spacing:0.04em;" id="botStateLabel">OFF — CONNECT KEYS TO GO LIVE</div>
         </div>
         <button class="master-switch" id="masterSwitch" onclick="toggleAutoBot()" aria-label="Toggle automatic trading bot"></button>
@@ -1181,7 +1228,7 @@
           </div>
         </div>
         <div class="equity-wrap">
-          <svg class="equity-svg" viewBox="0 0 320 130" preserveAspectRatio="none" aria-label="Sample equity curve placeholder">
+          <svg class="equity-svg" viewBox="0 0 320 130" preserveAspectRatio="none" aria-label="Session equity curve">
             <defs>
               <linearGradient id="eqFill" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#00e676" stop-opacity="0.35" />
@@ -1347,8 +1394,8 @@
     <!-- Base ID Changer -->
     <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid #e2e7f2;">
       <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-        <span style="font-size:12px; font-weight:800; color:#8b9bb4;">🔑 Your Base Secret ID:</span>
-        <input type="text" id="ntfyTopicInput" style="width:230px; background:#ffffff; color:#fff; border:1px solid #2c3e5a; border-radius:7px; padding:6px 10px; font-family:monospace; font-weight:800;" onchange="saveTopic()" />
+        <span style="font-size:12px; font-weight:800; color:#64748b;">🔑 Your Base Secret ID:</span>
+        <input type="text" id="ntfyTopicInput" style="width:230px; background:#ffffff; color:#0e1526; border:1px solid #d4dcec; border-radius:7px; padding:6px 10px; font-family:monospace; font-weight:800;" onchange="saveTopic()" />
         <button class="btn btn-dark" onclick="saveTopic()">🔄 Update 3 Category Codes</button>
       </div>
       <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
@@ -2534,7 +2581,7 @@ tickClock();
 setInterval(tickClock, 1000);
 
 // ============================================================================
-// 10. GENERIC INFO TOAST (USED BY THE AUTO-TRADING BOT PLACEHOLDER)
+// 10. GENERIC INFO TOAST (USED BY THE AUTO-TRADING BOT)
 // ============================================================================
 let appToastTimer = null;
 function showAppToast(titleHtml, msgHtml, color) {
@@ -2553,7 +2600,7 @@ function showAppToast(titleHtml, msgHtml, color) {
 }
 
 // ============================================================================
-// 11. 🤖 AUTOMATIC TRADING (BOT) — PLACEHOLDER CONTROLS (NO REAL ORDERS)
+// 11. 🤖 AUTOMATIC TRADING (BOT) — MASTER SWITCH & LIVE CONTROLS
 // ============================================================================
 let autoBotEnabled = false;
 
@@ -2611,8 +2658,8 @@ function botConnect(exchange) {
   showAppToast(
     '🔌 ' + exchange + (isMT ? ' — Expert Advisor Bridge' : ' API Connection'),
     isMT
-      ? 'Placeholder: <b>' + exchange + '</b> will connect through an <b>Expert Advisor (EA) bridge</b> — this website publishes Sniper V4 signals and your MT4/MT5 terminal pulls them via <b>WebRequest / webhook</b>, then opens and closes trades on your broker account automatically. No real connection is made in this preview.'
-      : 'Placeholder: secure <b>' + exchange + '</b> API-key connection will be available when the Automatic Trading Bot launches. No keys are stored or sent from this preview.',
+      ? '<b>' + exchange + '</b> links through the <b>Sniper V4 Expert Advisor (EA) bridge</b> — enter Account + Server in <b>🔌 Wallet &amp; Exchange Connections</b> above; orders queue to the EA and fill while your terminal runs it.'
+      : 'Open <b>🔌 Wallet &amp; Exchange Connections</b> above, pick <b>' + exchange + '</b>, paste spot-trading-only API keys, press <b>Connect &amp; Verify</b>, then <b>💰 LIVE</b> + the master switch — real orders from the first fill.',
     '#00b0ff'
   );
 }
@@ -2629,8 +2676,8 @@ document.querySelectorAll('.nav-link').forEach(a => {
 
 
 // ============================================================================
-// 13. FUNCTIONAL PAPER-TRADING BOT — TRADES BY ITSELF WITH THE SNIPER V4 ENGINE
-//     (Virtual money. The bot thinks like an insider: it uses the SAME engine
+// 13. AUTONOMOUS LIVE-ORDER BOT — TRADES BY ITSELF WITH THE SNIPER V4 ENGINE
+//     (Real-money only — entries/exits route to your connected target. It uses the SAME engine
 //      as the notifications AND listens to the live notification feed.)
 // ============================================================================
 const bot = {
@@ -2819,7 +2866,8 @@ async function openBotPosition(cat, symbol, key) {
     if (parseFloat(res.avgPrice) > 0) pos.entry = parseFloat(res.avgPrice);
     pos.histId = histAdd({ openedAt: pos.openedAt, closedAt: null, mode: pos.mode, tf: pos.tf, sym: symbol, side: sideTxt, entry: pos.entry, exit: null, result: 'OPEN \u25b2 live', pnl: null, note: 'order ' + pos.live.orderId });
   } else {
-    pos.histId = histAdd({ openedAt: pos.openedAt, closedAt: null, mode: 'PAPER', tf: pos.tf, sym: symbol, side: sideTxt, entry: t.entry, exit: null, result: dir === 1 ? 'OPEN \u00b7 going UP \u25b2' : 'OPEN \u00b7 going DOWN \u25bc', pnl: null });
+    showAppToast('🔒 LIVE target required', 'Auto-trading places <b>real orders only</b> — no demo fills. Reconnect your exchange keys or wallet in <b>🔌 Wallet &amp; Exchange Connections</b>, press <b>💰 LIVE</b>, then flip the switch. Nothing was opened.', '#ff1744');
+    return false;
   }
 
   bot.takenKeys.add(key);
@@ -3181,11 +3229,19 @@ function renderConnForm() {
           : '<span style="color:#ffd600;">\u26a1 On-chain LIVE: <b>OFF</b> \\u00b7 needs wallet on <b>BNB Smart Chain</b>, some <b>USDT (BEP-20)</b>, and a little <b>BNB for gas</b>.</span><br><button class="btn btn-dark" style="margin-top:9px; padding:6px 13px; font-size:11.5px;" onclick="ocToggleOnchain(true)">\u26a1 Enable on-chain auto-trade</button>') +
         '<br><button class="btn btn-dark" style="margin-top:9px; padding:6px 13px; font-size:11.5px;" onclick="refreshTrustBalance()">\u21bb Refresh balance</button></div>';
     } else {
+      const iosW = /iPhone|iPad|iPod/.test(navigator.userAgent || '');
       h += '<div class="conn-field"><label>How to connect</label>' +
         '<div style="font-size:12.5px; line-height:1.65; color:var(--muted);">' +
-        '<b>📱 On your phone:</b> open this site inside the <b>Trust Wallet app \u2192 Discover (browser) tab</b>, then press <b>💠 Connect Trust Wallet</b> below.<br>' +
-        '<b>💻 On desktop:</b> install the Trust Wallet (or MetaMask) browser extension, unlock it, then press Connect.<br>' +
-        '<span style="color:#00e676;">It requests your <b>public address only</b> \u2014 view-only, no signing, no approvals, no seed phrase.</span></div></div>';
+        '<b>📱 Easiest (Android):</b> tap <b>Open in Trust Wallet</b> below — the Trust app opens this site in its own DApp browser with your wallet already injected, then press <b>💠 Connect Trust Wallet</b>.<br>' +
+        '<b>📱 Manual:</b> copy the site link, open <b>Trust Wallet app → Discover</b>, paste it in the address bar, come back and press Connect.<br>' +
+        '<b>💻 Desktop:</b> install the Trust Wallet browser extension (Chrome), unlock it, then press Connect.<br>' +
+        '<span style="color:#047857;">View-only: <b>public address + balance only</b> — no signing, no approvals, no seed phrase. Trades stay <b>manual</b>: your wallet asks you to confirm every swap itself.</span></div>' +
+        '<div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">' +
+        (iosW ? '' : '<button class="btn btn-blue" onclick="trustOpenDapp()">📲 Open in Trust Wallet</button>') +
+        '<button class="btn" onclick="trustCopyLink()">📋 Copy site link</button>' +
+        '</div>' +
+        (iosW ? '<div class="conn-note" style="margin-top:9px;">⚠️ <b>iPhone:</b> Apple forced Trust Wallet to remove its built-in browser, so the one-tap button cannot work on iOS. Connect from <b>desktop Chrome + the Trust extension</b> or an <b>Android</b> phone. Everything else on this site works normally on iPhone.</div>' : '') +
+        '</div>';
     }
   } else {
     h += '<div class="conn-field"><label>Trading account number</label>' +
@@ -3333,6 +3389,32 @@ function setBotExec(mode) {
   updateExecTarget();
 }
 
+// ── Real-money contract: if the execution target disappears while the bot is
+//    running, PAUSE (never silently substitute paper trades). ──
+function pauseBotTargetLost() {
+  if (!bot.enabled && !autoBotEnabled) return;
+  bot.enabled = false;
+  autoBotEnabled = false;
+  const sw = document.getElementById('masterSwitch');
+  if (sw) sw.classList.remove('on');
+  const stl = document.getElementById('botStateLabel');
+  if (stl) { stl.textContent = '\ud83d\uded1 Paused — execution target disconnected'; stl.style.color = ''; }
+  const stt = document.getElementById('botStatus');
+  if (stt) {
+    stt.textContent = bot.position
+      ? '\ud83d\uded1 Bot paused — target disconnected. Open position kept: reconnect + \ud83d\udcb0 LIVE + switch on to let the bot exit it (or close it on the exchange yourself).'
+      : '\ud83d\uded1 Bot paused — target disconnected. Reconnect keys/wallet, press \ud83d\udcb0 LIVE, then flip the switch again.';
+    stt.style.color = '#ff1744';
+  }
+  showAppToast('\ud83d\uded1 Bot paused — target disconnected',
+    'Auto-trading stopped because the execution target is gone. <b>No paper trades</b> — this bot is real-money only. ' +
+    (bot.position
+      ? 'Your open position stays recorded — reconnect and go LIVE again so the bot can exit it, or close it manually on the exchange.'
+      : 'Reconnect in 🔌 Wallet &amp; Exchange Connections, press 💰 LIVE, flip the switch.'),
+    '#ff1744');
+  try { botLogAdd({ timeStr: new Date().toLocaleTimeString(), tf: bot.tf, action: '\ud83d\uded1 PAUSED', entry: 0, status: 'execution target disconnected', cls: '#ff1744' }); } catch (e) {}
+}
+
 async function connectConn() {
   const k = connSelected;
   const msg = (t, color) => {
@@ -3414,7 +3496,7 @@ function forgetConn() {
   renderConnForm();
   const el = document.getElementById('connMsg');
   if (el) { el.textContent = 'Keys/account for ' + CONN_META[k].label + ' erased from this browser.'; el.style.color = '#8ea0bd'; }
-  if (bot.live && !getLiveTarget()) setBotExec('paper');
+  if (bot.live && !getLiveTarget()) { setBotExec('paper'); pauseBotTargetLost(); }
 }
 
 async function placeLiveOrder(side, symbol, opts) {
@@ -3696,7 +3778,7 @@ function ocToggleOnchain(on) {
     renderConnForm();
     msg('⚡ on-chain trading disabled — wallet back to view-only.', '#8ea0bd');
     showAppToast('💠 On-chain trading disabled', 'The wallet stays connected for balances, but LIVE wallet trades are off. Exchange keys / EA bridge still work.', '#8ea0bd');
-    if (bot.live && !getLiveTarget()) setBotExec('paper');
+    if (bot.live && !getLiveTarget()) { setBotExec('paper'); pauseBotTargetLost(); }
     return;
   }
   if (!window.ethereum || !window.ethereum.request) {
@@ -4636,6 +4718,34 @@ function tickSessions() {
   const sbn = document.getElementById('sbNote');
   if (sbn) sbn.textContent = (tyo && lon) ? '🔥 Asia × London overlap' : (lon && ny) ? '🔥 London × NY overlap — peak liquidity' : (tyo && !lon && !ny) ? 'Asia session — thinner books' : (tyo || lon || ny) ? 'Session open' : 'Between sessions — thin liquidity';
   try { maybeDailyPnlPush(); } catch (e) {}
+}
+// ── Trust Wallet accessibility: official deep link into the Trust DApp browser ──
+function trustOpenDapp() {
+  const u = String(location.href || '').split('#')[0];
+  const target = 'https://link.trustwallet.com/open_url?coin_id=60&url=' + encodeURIComponent(u);
+  try { location.href = target; } catch (e) { try { window.open(target, '_blank'); } catch (e2) {} }
+}
+function trustCopyLink() {
+  const u = String(location.href || '').split('#')[0];
+  const done = function () {
+    showAppToast('📋 Link copied', 'Open <b>Trust Wallet app → Discover</b>, paste this link in the address bar, then come back and press <b>💠 Connect Trust Wallet</b>. Your wallet stays <b>view-only</b> — every swap still asks for your confirmation.', '#00b0ff');
+  };
+  const fb = function () {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = u; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      done();
+    } catch (e) {
+      showAppToast('Copy this link manually', u, '#00b0ff');
+    }
+  };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(u).then(done, fb);
+    else fb();
+  } catch (e) { fb(); }
 }
 // ── v7 ink remap: JS-set colors from the dark era → readable on the light UI ──
 (function () {

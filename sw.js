@@ -1,5 +1,5 @@
 /* Insider Sniper V4 — minimal offline shell service worker */
-const CACHE = 'sniper-v4-v2';
+const CACHE = 'sniper-v4-v3';
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
